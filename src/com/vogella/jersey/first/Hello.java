@@ -8,7 +8,6 @@ import javax.ws.rs.core.MediaType;
 
 import org.hibernate.tutorial.annotations.AnnotationsIllustrationTest;
 
-
 //Plain old Java Object it does not extend as class or implements 
 //an interface
 
@@ -22,38 +21,38 @@ import org.hibernate.tutorial.annotations.AnnotationsIllustrationTest;
 @Path("/hello")
 public class Hello {
 
-// This method is called if TEXT_PLAIN is request
-@GET
-@Produces(MediaType.TEXT_PLAIN)
-public String sayPlainTextHello() {
+	// This method is called if TEXT_PLAIN is request
+	@GET
+	@Produces(MediaType.TEXT_PLAIN)
+	public String sayPlainTextHello() {
 
- return "Hello Jersey!!!!";
+		return "Hello Jersey!!!!";
+	}
+
+	// This method is called if XML is request
+	@GET
+	@Produces(MediaType.TEXT_XML)
+	public String sayXMLHello() {
+		return "<?xml version=\"1.0\"?>" + "<hello> Hello Jersey!!!" + "</hello>";
+	}
+
+	// This method is called if HTML is request
+	@GET
+	@Produces(MediaType.TEXT_HTML)
+	public String sayHtmlHello() {
+		// Hibernate Test
+		AnnotationsIllustrationTest testApp = new AnnotationsIllustrationTest();
+		try {
+			testApp.setUp();
+			testApp.testBasicUsage();
+			testApp.tearDown();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		// ---------
+
+		return "<html> " + "<title>" + "Hello Jersey!!" + "</title>" + "<body><h1>" + "Hello Jersey!!" + "</body></h1>"
+				+ "</html> ";
+	}
+
 }
-
-// This method is called if XML is request
-@GET
-@Produces(MediaType.TEXT_XML)
-public String sayXMLHello() {
- return "<?xml version=\"1.0\"?>" + "<hello> Hello Jersey!!!" + "</hello>";
-}
-
-// This method is called if HTML is request
-@GET
-@Produces(MediaType.TEXT_HTML)
-public String sayHtmlHello() {
-	//Hibernate Test
-	AnnotationsIllustrationTest testApp = new AnnotationsIllustrationTest(); 
-	try {
-		testApp.setUp();
-		testApp.testBasicUsage();
-		testApp.tearDown();
-	} catch (Exception e) {
-		e.printStackTrace();
-	}	
-	//---------
-	
- return "<html> " + "<title>" + "Hello Jersey!!!!!!" + "</title>"
-     + "<body><h1>" + "Hello Jersey!!!!!!!!" + "</body></h1>" + "</html> ";
-}
-
-} 
